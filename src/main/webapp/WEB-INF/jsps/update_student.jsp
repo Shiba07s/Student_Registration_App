@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	 <h2>Update Lead</h2>
+	 <h2>Update Student</h2>
      <form action="updateStudent" method="post">
             <input type="hidden" name="id" value="${student.id }"/> 
             firstName<input type="text" name="firstName" value="${student.firstName}"/> 

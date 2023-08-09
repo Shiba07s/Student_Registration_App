@@ -63,7 +63,7 @@
 <body>
 <h2>Student list</h2>
  
-<a href="back" class="home-link">HomePage</a>
+<a href="back" class="home-link">BACK</a>
 
      <table>
            <tr>
@@ -87,8 +87,8 @@
                   <td>${student.email }</td>
                   <td>${student.mobile }</td>
                   <td>${student.qualification }</td>
-                   <td><a href="delete?id=${student.id}">Delete</a></td>
-                   <td><a href="update?id=${student.id}">Update</a></td>
+                   <td><button><a href="delete?id=${student.id}">Delete</a></button></td>
+                   <td><button><a href="update?id=${student.id}">Update</a></button></td>
               </tr>
            </c:forEach>
      </table>
