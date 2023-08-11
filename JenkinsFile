@@ -1,0 +1,25 @@
+node('main'){
+    stage('checkout code'){
+        checkout scm
+    }
+    stage('Build'){
+        sh "mvn clean install -Dmaven.test.skip=true"
+    }
+    stage('Test Cases Execution'){
+        sh "mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Pcoverage-per-test"
+    }
+    stage('Archive Artifacts'){
+        archiveArtifacts artifacts: 'target/*.war'
+    }
+    stage('Deployment'){
+        deploy adapters: [tomcat9(credentialsId: 'c964fce0-29f1-4968-873b-7989c39109bf', path: '', url: 'http://16.171.137.142:8090/')], contextPath: 'counterwebapp', war: 'target/*.war'
+    }
+    stage('notification'){
+        emailext{
+            subject: "Job Completed",
+            body: "Jenkins pipeline job for maven build is completed !!!",
+            to: "swayansiddhadash875@gmail.com"
+            
+        }
+    }
+}
