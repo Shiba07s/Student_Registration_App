@@ -8,10 +8,11 @@
 		<version>2.7.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.metaex</groupId>
-	<artifactId>MetaEx</artifactId>
+	<groupId>com.studentapplication</groupId>
+	<artifactId>Registration_Application-1</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>MetaEx</name>
+	<packaging>war</packaging>
+	<name>Registration_Application-1</name>
 	<description>Demo project for Spring Boot we build a garuda application</description>
 	<properties>
 		<java.version>8</java.version>

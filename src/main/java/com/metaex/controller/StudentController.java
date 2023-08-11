@@ -70,6 +70,11 @@ public class StudentController {
 		return "home";
 		
 	}
+	@RequestMapping("/refresh")
+	public String refreshButton() {
+		return "student_registration";
+		
+	}
 	
 	@RequestMapping("/studentRegistration")
 	public String viewRegistrationPage() {
