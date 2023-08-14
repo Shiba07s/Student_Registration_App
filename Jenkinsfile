@@ -5,6 +5,13 @@ pipeline{
     }
 
     stages{
+         stage("clone code"){
+            steps {
+                echo "clone the code into github"
+                git url:"https://github.com/Shiba07s/Student_Registration_App.git", branch:"main"
+            }
+            
+        }
         stage ('Build'){
             steps{
                 sh 'cd /home/ubuntu/Student_Registration_App && mvn clean package'
