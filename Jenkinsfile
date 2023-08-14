@@ -7,7 +7,7 @@ pipeline{
     stages{
         stage ('Build'){
             steps{
-                sh 'mvn clean package'
+                sh 'cd /home/ubuntu/Student_Registration_App && mvn clean package'
             }
             post{
                 success{
