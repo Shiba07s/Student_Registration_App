@@ -24,12 +24,18 @@ pipeline{
                 }
             }
         }
-        stage ('Deploy on Tomcat server'){
-            steps{
-                deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://13.53.124.64:9090/')], contextPath: '/var/lib/tomcat9/webapps', war: '**/*.war'
-            }
+       stage('Deploy') {
+    steps {
+        // Copy the generated WAR file to the Tomcat webapps directory
+        sh 'cp target/spring-boot-application.war /var/lib/tomcat9/webapps/'
 
-        }
+        // Restart Tomcat to deploy the application
+        sh '/var/lib/tomcat9/bin/catalina.sh restart'
+
+        // Wait for Tomcat to start (optional)
+        sleep(time: 30, unit: 'SECONDS')
+    }
+} 
 
     //     stage('Deploy') {
     //         steps {
