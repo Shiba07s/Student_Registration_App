@@ -27,7 +27,7 @@ pipeline{
         stage('Deploy') {
             steps {
                 // Copy the generated WAR file to the Tomcat webapps directory
-                sh 'cp target/ Registration_Application-1-0.0.1-SNAPSHOT.war /var/lib/tomcat9/webapps'
+                sh 'cp -r target/ Registration_Application-1-0.0.1-SNAPSHOT.war /var/lib/tomcat9/webapps'
                 
                 // Restart Tomcat to deploy the application
                 sh '/var/lib/tomcat9/bin/shutdown.sh'
@@ -41,7 +41,7 @@ pipeline{
     post {
         always {
             // Clean up temporary artifacts or perform any necessary post-deployment tasks
-            sh 'rm -f target/ Registration_Application-1-0.0.1-SNAPSHOT.war /var/lib/tomcat9/webapps'
+            sh 'rm -rvf target/ Registration_Application-1-0.0.1-SNAPSHOT.war /var/lib/tomcat9/webapps'
 
         }
     }
