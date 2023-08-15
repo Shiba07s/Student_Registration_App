@@ -27,7 +27,7 @@ pipeline{
        stage('Deploy') {
     steps {
         // Copy the generated WAR file to the Tomcat webapps directory
-        sh 'cp target/spring-boot-application.war /var/lib/tomcat9/webapps/'
+        sh 'cp target/Registration_Application-1-0.0.1-SNAPSHOT.war /var/lib/tomcat9/webapps/'
 
         // Restart Tomcat to deploy the application
         sh '/var/lib/tomcat9/bin/catalina.sh restart'
