@@ -24,12 +24,13 @@ pipeline{
                 }
             }
         }
-        stage('deploy') {
-            steps {
-                echo "deploy on Tomcat Server"
+        stage ('Deploy on Tomcat server'){
+            steps{
                 deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://13.53.124.64:9090/')], contextPath: null, war: '**/*.war'
             }
+
         }
+
     //     stage('Deploy') {
     //         steps {
     //             // Copy the generated WAR file to the Tomcat webapps directory
@@ -51,5 +52,6 @@ pipeline{
 
     //     }
     // }
+    }
 
 }
