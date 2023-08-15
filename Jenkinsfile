@@ -2,21 +2,21 @@ pipeline {
     agent any
     
     environment {
-        // Define environment variables here if needed
+        echo "Define environment variables here if needed"
         MAVEN_HOME = tool name: 'Maven', type: 'maven'
     }
     
     stages {
         stage('Checkout') {
             steps {
-                // Checkout source code from Git repository
+                echo "Checkout source code from Git repository"
                 checkout scm
             }
         }
         
         stage('Build') {
             steps {
-                // Build the Spring Boot application using Maven
+                echo "Build the Spring Boot application using Maven"
                 sh "${env.MAVEN_HOME}/bin/mvn clean package"
             }
         }
@@ -46,17 +46,5 @@ pipeline {
                 // Example: deploy to a server, container, or cloud service
             }
         }
-    }
-    
-    post {
-        always {
-            // Clean up or post-build actions
-        }
-        success {
-            // Actions to perform on successful build and deployment
-        }
-        failure {
-            // Actions to perform if the build or deployment fails
-        }
-    }
+    } 
 }
