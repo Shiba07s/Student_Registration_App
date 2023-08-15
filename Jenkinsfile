@@ -17,7 +17,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Build the Spring Boot application using Maven"
-                sh "${env.MAVEN_HOME}/bin/mvn clean package"
+                sh "${env.MAVEN_HOME}/usr/share/maven clean package"
             }
         }
         
