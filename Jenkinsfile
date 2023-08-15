@@ -14,6 +14,7 @@ pipeline{
         }
         stage ('Build'){
             steps{
+                echo "successfully creating war file"
                 sh 'mvn clean package'
             }
             post{
@@ -25,7 +26,8 @@ pipeline{
         }
         stage ('Deploy on Tomcat server'){
             steps{
-                deploy adapters: [tomcat9(credentialsId: 'ecf45f53-e6b5-4bea-a18b-c5128a544371', path: '', url: 'http://16.171.22.140:8090/')], contextPath: null, war: '**/*.war'
+                echo "deploy to tomcat server"
+                deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://13.53.124.64:9090/')], contextPath: null, war: '**/*.war'
             }
 
         }
