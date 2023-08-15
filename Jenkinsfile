@@ -1,50 +1,33 @@
-pipeline {
+pipeline{
     agent any
-    
     tools{
         maven 'local_maven'
     }
 
-    
-    stages {
-        stage('Checkout') {
+    stages{
+         stage("clone code"){
             steps {
-                echo "Checkout source code from Git repository"
-                checkout scm
+                echo "clone the code into github"
+                git url:"https://github.com/Shiba07s/Student_Registration_App.git", branch:"main"
+            }
+            
+        }
+        stage ('Build'){
+            steps{
+                sh 'mvn clean package'
+            }
+            post{
+                success{
+                    echo 'Archiving the Artifacts'
+                    archiveArtifacts artifacts: '**/target/*.war'
+                }
             }
         }
-        
-        stage('Build') {
-            steps {
-                echo "Build the Spring Boot application using Maven"
-                sh "${env.MAVEN_HOME}/usr/share/maven clean package"
+        stage ('Deploy on Tomcat server'){
+            steps{
+                deploy adapters: [tomcat9(credentialsId: 'ecf45f53-e6b5-4bea-a18b-c5128a544371', path: '', url: 'http://16.171.22.140:8090/')], contextPath: null, war: '**/*.war'
             }
+
         }
-        
-        // stage('Code Quality') {
-        //     steps {
-        //         script {
-        //             def scannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                    
-        //             withSonarQubeEnv('SonarQube') {
-        //                 sh "${scannerHome}/bin/sonar-scanner"
-        //             }
-        //         }
-        //     }
-        // }
-        
-        stage('Security Scan') {
-            steps {
-                echo "Run OWASP Dependency-Check security scanning"
-               // sh "mvn org.owasp:dependency-check-maven:check"
-            }
-        }
-        
-        stage('Deploy') {
-            steps {
-                echo "Deploy the Spring Boot application to the desired environment"
-                // Example: deploy to a server, container, or cloud service
-            }
-        }
-    } 
+    }
 }
