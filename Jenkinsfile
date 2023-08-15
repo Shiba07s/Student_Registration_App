@@ -24,12 +24,26 @@ pipeline{
                 }
             }
         }
-        stage ('Deploy on Tomcat server'){
-            steps{
-                echo "deploy to tomcat server"
-                deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://13.53.124.64:9090/')], contextPath: null, war: '**/*.war'
+        stage('Deploy') {
+            steps {
+                // Copy the generated WAR file to the Tomcat webapps directory
+                sh 'cp target/ Registration_Application-1-0.0.1-SNAPSHOT.war /var/lib/tomcat9/webapps'
+                
+                // Restart Tomcat to deploy the application
+                sh '/var/lib/tomcat9/bin/shutdown.sh'
+                sh '/var/lib/tomcat9/bin/startup.sh'
+                
+                // Wait for Tomcat to start
+                sleep(time: 30, unit: 'SECONDS')
             }
+        }
+    } 
+    post {
+        always {
+            // Clean up temporary artifacts or perform any necessary post-deployment tasks
+            sh 'rm -f target/ Registration_Application-1-0.0.1-SNAPSHOT.war /var/lib/tomcat9/webapps'
 
         }
     }
+
 }
