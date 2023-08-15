@@ -29,11 +29,13 @@ pipeline{
         // Copy the generated WAR file to the Tomcat webapps directory
         sh 'cp target/Registration_Application-1-0.0.1-SNAPSHOT.war /var/lib/tomcat9/webapps/'
 
-        // Restart Tomcat to deploy the application
-        sh '/var/lib/tomcat9/bin/catalina.sh restart'
-
-        // Wait for Tomcat to start (optional)
+     // Restart Tomcat to deploy the application
+        sh '/var/lib/tomcat9/bin/shutdown.sh'
+        sh '/var/lib/tomcat9/bin/startup.sh'
+                
+                // Wait for Tomcat to start
         sleep(time: 30, unit: 'SECONDS')
+
     }
 } 
 
