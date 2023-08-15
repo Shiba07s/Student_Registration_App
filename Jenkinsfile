@@ -1,10 +1,10 @@
 pipeline {
     agent any
     
-    environment {
-        echo "Define environment variables here if needed"
-        MAVEN_HOME = tool name: 'Maven', type: 'maven'
+    tools{
+        maven 'local_maven'
     }
+
     
     stages {
         stage('Checkout') {
