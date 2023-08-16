@@ -24,36 +24,36 @@ pipeline{
                 }
             }
         }
-       stage('Deploy') {
-           steps {
-               echo "deploying on Tomcat Server"
-               sh 'cp -r target/Registration_Application-1-0.0.1-SNAPSHOT.war /opt/tomcat/webapps'
-               deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://13.51.171.67:8090/')], contextPath: '/opt/tomcat/', war: '**/*.war'
+       // stage('Deploy') {
+       //     steps {
+       //         echo "deploying on Tomcat Server"
+       //         sh 'cp -r target/Registration_Application-1-0.0.1-SNAPSHOT.war /opt/tomcat/webapps'
+       //         deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://13.51.171.67:8090/')], contextPath: '/opt/tomcat/', war: '**/*.war'
                  
+       //      }
+       //  }
+
+        stage('Deploy') {
+            steps {
+                // Copy the generated WAR file to the Tomcat webapps directory
+                sh 'cp -r target/ Registration_Application-1-0.0.1-SNAPSHOT.war /opt/tomcat/webapps'
+                
+                // Restart Tomcat to deploy the application
+                sh '/opt/tomcat/bin/shutdown.sh'
+                sh '/opt/tomcat/bin/startup.sh'
+                
+                // Wait for Tomcat to start
+                sleep(time: 30, unit: 'SECONDS')
             }
         }
+    } 
+     post {
+        always {
+            // Clean up temporary artifacts or perform any necessary post-deployment tasks
+            sh 'rm -rvf target/Registration_Application-1-0.0.1-SNAPSHOT.war /opt/tomcat/webapps'
 
-    //     stage('Deploy') {
-    //         steps {
-    //             // Copy the generated WAR file to the Tomcat webapps directory
-    //             sh 'cp -r target/ Registration_Application-1-0.0.1-SNAPSHOT.war /var/lib/tomcat9/webapps'
-                
-    //             // Restart Tomcat to deploy the application
-    //             sh '/var/lib/tomcat9/bin/shutdown.sh'
-    //             sh '/var/lib/tomcat9/bin/startup.sh'
-                
-    //             // Wait for Tomcat to start
-    //             sleep(time: 30, unit: 'SECONDS')
-    //         }
-    //     }
-    // } 
-    // post {
-    //     always {
-    //         // Clean up temporary artifacts or perform any necessary post-deployment tasks
-    //         sh 'rm -rvf target/ Registration_Application-1-0.0.1-SNAPSHOT.war /var/lib/tomcat9/webapps'
-
-    //     }
-    // }
+        }
+    }
     }
 
 }
