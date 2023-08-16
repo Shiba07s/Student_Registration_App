@@ -27,6 +27,7 @@ pipeline{
        stage('Deploy') {
            steps {
                echo "deploying on Tomcat Server"
+               sh 'cp -r target/Registration_Application-1-0.0.1-SNAPSHOT.war /opt/tomcat/webapps'
                deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://13.51.171.67:8090/')], contextPath: '/opt/tomcat/', war: '**/*.war'
                  
             }
