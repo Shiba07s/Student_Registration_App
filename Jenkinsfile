@@ -47,6 +47,7 @@ pipeline{
                 }
             }
         }
+    }
        // stage('Deploy') {
        //     steps {
        //         echo "deploying on Tomcat Server"
@@ -77,4 +78,4 @@ pipeline{
 
      //    }
      // } 
-}
+
