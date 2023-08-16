@@ -3,6 +3,9 @@ pipeline{
     tools{
         maven 'local_maven'
     }
+    environment {
+        TOMCAT_WEBAPPS = '/var/lib/tomcat9/webapps' // Set this to the actual path of the Tomcat webapps directory
+    }
 
     stages{
          stage("clone code"){
@@ -24,20 +27,14 @@ pipeline{
                 }
             }
         }
-       stage('Deploy') {
-    steps {
-        // Copy the generated WAR file to the Tomcat webapps directory
-        sh 'cp target/Registration_Application-1-0.0.1-SNAPSHOT.war /var/lib/tomcat9/webapps/'
-
-     // Restart Tomcat to deploy the application
-        sh '/usr/share/tomcat9/bin/shutdown.sh'
-        sh '/usr/share/tomcat9/bin/startup.sh'
-                
-                // Wait for Tomcat to start
-        sleep(time: 30, unit: 'SECONDS')
-
-    }
-} 
+       stage('Copy HTML to Tomcat') {
+           steps {
+                script {
+                    def tomcatWebappsDir = "/var/lib/tomcat9/webapps/ROOT/"
+                    sh "${tomcatWebappsDir}"
+                }
+            }
+        }
 
     //     stage('Deploy') {
     //         steps {
