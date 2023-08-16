@@ -36,7 +36,7 @@ pipeline{
         stage('Deploy') {
             steps {
                 // Copy the generated WAR file to the Tomcat webapps directory
-                sh 'cp -r target/ Registration_Application-1-0.0.1-SNAPSHOT.war /opt/tomcat/webapps'
+                sh 'cp -r target/Registration_Application-1-0.0.1-SNAPSHOT.war /opt/tomcat/webapps'
                 
                 // Restart Tomcat to deploy the application
                 sh '/opt/tomcat/bin/shutdown.sh'
