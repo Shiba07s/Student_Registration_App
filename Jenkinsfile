@@ -38,16 +38,16 @@ pipeline{
                 }
             }
         }
-        stage('Restart Tomcat') {
-            steps {
-                script {
-                    sh "${TOMCAT_HOME}/bin/shutdown.sh"
-                    sleep 10
-                    sh "${TOMCAT_HOME}/bin/startup.sh"
-                }
-            }
-        }
-    }
+    //     stage('Restart Tomcat') {
+    //         steps {
+    //             script {
+    //                 sh "${TOMCAT_HOME}/bin/shutdown.sh"
+    //                 sleep 10
+    //                 sh "${TOMCAT_HOME}/bin/startup.sh"
+    //             }
+    //         }
+    //     }
+    // }
        // stage('Deploy') {
        //     steps {
        //         echo "deploying on Tomcat Server"
