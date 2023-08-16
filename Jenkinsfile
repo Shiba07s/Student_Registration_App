@@ -3,10 +3,7 @@ pipeline{
     tools{
         maven 'local_maven'
     }
-    environment {
-        TOMCAT_WEBAPPS = '/var/lib/tomcat9/webapps' // Set this to the actual path of the Tomcat webapps directory
-    }
-
+     
     stages{
          stage("clone code"){
             steps {
@@ -27,12 +24,11 @@ pipeline{
                 }
             }
         }
-       stage('Copy HTML to Tomcat') {
+       stage('Deploy') {
            steps {
-                script {
-                    def tomcatWebappsDir = "/var/lib/tomcat9/webapps/ROOT/"
-                    sh "${tomcatWebappsDir}"
-                }
+               echo "deploying on Tomcat Server"
+               deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://13.51.171.67:8090/')], contextPath: '/opt/tomcat/', war: '**/*.war'
+                 
             }
         }
 
