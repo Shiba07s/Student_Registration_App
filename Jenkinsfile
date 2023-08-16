@@ -1,9 +1,9 @@
 pipeline{
     agent any
-    environment {
-       // JAVA_HOME = tool name: 'JDK8', type: ' https://download.oracle.com/otn/java/jdk/8u221-b11/230deb18db3e4014bb8e3e8324f81b43/jdk-8u221-linux-x64.tar.gz'
-        TOMCAT_HOME = '/var/lib/tomcat9'
-    }
+    // environment {
+    //    // JAVA_HOME = tool name: 'JDK8', type: ' https://download.oracle.com/otn/java/jdk/8u221-b11/230deb18db3e4014bb8e3e8324f81b43/jdk-8u221-linux-x64.tar.gz'
+    //     TOMCAT_HOME = '/var/lib/tomcat9'
+    // }
     tools{
         maven 'local_maven'
     }
@@ -30,14 +30,19 @@ pipeline{
         }
         stage('Deploy') {
             steps {
-                script {
-                    def warFilePath = "${workspace}/target/Registration_Application-1-0.0.1-SNAPSHOT.war.original"
-                    def tomcatWebapps = "${TOMCAT_HOME}/webapps"
-                    
-                    sh "cp ${warFilePath} ${tomcatWebapps}/"
-                }
+                 deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://16.16.66.171:8090/')], contextPath: 'student_app', war: '**/*.war'
             }
         }
+        // stage('Deploy') {
+        //     steps {
+        //         script {
+        //             def warFilePath = "${workspace}/target/Registration_Application-1-0.0.1-SNAPSHOT.war.original"
+        //             def tomcatWebapps = "${TOMCAT_HOME}/webapps"
+                    
+        //             sh "cp ${warFilePath} ${tomcatWebapps}/"
+        //         }
+        //     }
+        // }
     //     stage('Restart Tomcat') {
     //         steps {
     //             script {
