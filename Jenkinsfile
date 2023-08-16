@@ -53,7 +53,7 @@ pipeline{
             sh 'rm -rvf target/Registration_Application-1-0.0.1-SNAPSHOT.war /opt/tomcat/webapps'
 
         }
-    }
+     }
     }
 
 }
