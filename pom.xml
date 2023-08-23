@@ -70,6 +70,7 @@
 			</plugin>
 		</plugins>
 		<finalName>student-application</finalName>
+		 
 	</build>
 
 </project>
