@@ -68,8 +68,7 @@
 					</excludes>
 				</configuration>
 			</plugin>
-		</plugins>
-		<finalName>student-application</finalName>
+		</plugins> 
 		 
 	</build>
 
