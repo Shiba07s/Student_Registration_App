@@ -5,7 +5,7 @@ pipeline{
     //     TOMCAT_HOME = '/var/lib/tomcat9'
     // }
     tools{
-        maven 'local_maven'
+        maven 'local-maven'
     }
      
     stages{
