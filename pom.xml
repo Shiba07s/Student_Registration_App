@@ -69,6 +69,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalname>student-application</finalname>
 	</build>
 
 </project>
