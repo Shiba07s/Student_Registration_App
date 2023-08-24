@@ -37,8 +37,8 @@ pipeline {
         stage("deploy"){
             steps {
                 echo "deploy"
-                //sh "docker-compose down && docker-compose up -d"
-               sh "docker run -p 9095:9095 ldtech-docker.jar:latest"
+                sh "docker-compose down && docker-compose up -d"
+               //sh "docker run -p 9095:9095 ldtech-docker.jar:latest"
             }
             
         }
