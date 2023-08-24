@@ -1,4 +1,4 @@
 FROM openjdk:11-jre-slim
 EXPOSE 9095
-ADD target/ldtech-docker.jar ldtech-docker.jar
-ENTRYPOINT [ "java","-jar","/ldtech-docker.jar" ]
+ADD target/registration-docker.jar registration-docker.jar
+ENTRYPOINT [ "java","-jar","/registration-docker.jar" ]
