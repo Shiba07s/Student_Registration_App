@@ -79,7 +79,8 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<fileName>registration-docker</fileName>
+<!-- 		<fileName>registration-docker</fileName> -->
+		<finalName>registration-docker</finalName>
 	</build>
 
 </project>
