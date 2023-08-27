@@ -11,7 +11,7 @@
 	<groupId>com.metaex</groupId>
 	<artifactId>MetaEx</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	 
 	<name>MetaEx</name>
 	<description>Demo project for Spring Boot we build a garuda application</description>
 	<properties>
@@ -79,6 +79,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<fileName>registration-docker</fileName>
 	</build>
 
 </project>
