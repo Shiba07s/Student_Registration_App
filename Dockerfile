@@ -6,7 +6,7 @@
 FROM openjdk:17  
 WORKDIR /app
 COPY . /app
-RUN ./student build
+RUN ./registration-docker.jar
 
 # Runtime Stage
 FROM openjdk:17-jre-slim
