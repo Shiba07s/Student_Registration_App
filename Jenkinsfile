@@ -33,6 +33,15 @@ pipeline{
                  deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://16.171.38.164:8090/')], contextPath: '', war: '**/*.war'
             }
         }
+          stage('Restart Tomcat') {
+            steps {
+                script {
+                    sh "/usr/share/tomcat9/bin/shutdown.sh"
+                    sleep 10
+                    sh "/usr/share/tomcat9/bin/startup.sh"
+                }
+            }
+        }
         // stage('Deploy') {
         //     steps {
         //         script {
