@@ -1,0 +1,6 @@
+version : "3"
+services :
+  web :
+     image : shiba07s/registration-docker.jar:latest
+     ports :
+         - "9093:8080"
